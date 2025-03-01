@@ -1,0 +1,12 @@
+gzipx                   = (gzip_frame)* seek_frame
+gzip_frame              = [RFC 1952]
+seek_frame              = [empty gzip with extra bytes: frame_table block_table]
+frame_table             = frame_count (frame_entry)*
+frame_count             = varint
+frame_entry             = gzip_frame_size
+gzip_frame_size         = varint
+block_table             = block_count (block_entry)*
+block_count             = varint
+block_entry             = block_offset block_offset
+block_offset            = varint
+block_offset            = varint
