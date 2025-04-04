@@ -8,6 +8,7 @@ import (
 
 	"github.com/nfam/pool/buffer"
 	pgzip "github.com/nfam/pool/gzip"
+	"github.com/nfam/pool/iocopy"
 )
 
 type Writer struct {
@@ -64,7 +65,7 @@ func (w *Writer) WriteBlock(r io.Reader) error {
 		w.frame.Reset(&w.stat)
 	}
 
-	n, err := io.Copy(w.frame, r)
+	n, err := iocopy.Copy(w.frame, r)
 	if err != nil {
 		return err
 	}

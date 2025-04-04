@@ -9,6 +9,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/nfam/pool/iocopy"
 )
 
 func TestContent(t *testing.T) {
@@ -75,7 +77,7 @@ func TestContent(t *testing.T) {
 			t.Error(err)
 			return
 		}
-		io.Copy(io.Discard, blockReader)
+		iocopy.Copy(io.Discard, blockReader)
 	}
 	d := time.Since(start) / time.Duration(len(zr.File))
 	_ = os.WriteFile("testdata/"+strings.TrimSuffix(content_file, ".zip")+".read.txt", []byte(d.String()), os.ModePerm)
